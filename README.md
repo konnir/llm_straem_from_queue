@@ -1,3 +1,4 @@
+# Stream Vs Queue in LLM Stream Response
 - The purpose of this repository is to compare the time difference between direct stream LLM responses and reading them from Queues. 
 - In this Demo any token is published to the queue for demonstaration. In real use it's wise to decide on full sentence or line break for queue write and read.
 
@@ -13,9 +14,8 @@ How to use?
 - Start llm_stream_server.py
 - Inside: llm_queue_server.py, change in method "main()" to read "templates/index_local.html" instead of index.html
 - Start llm_queue_server.py
-- 
-
 
 Licence: 
 - All work done by the author is free to use without any warranty.
-- Any third parties code, models and others belong to their authors and legal entities, it's user responsibility to check and get any needed approval. 
+- Any third parties code, models and others belong to their authors and legal entities, it's user responsibility to check and get any needed approval.
+- The purpose of this code and demo is for reaserch only. 
