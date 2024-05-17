@@ -17,5 +17,5 @@ How to use?
 
 
 Licence: 
--All work done by the author is free to use without any warranty.
+- All work done by the author is free to use without any warranty.
 - Any third parties code, models and others belong to their authors and legal entities, it's user responsibility to check and get any needed approval. 
