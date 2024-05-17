@@ -1,4 +1,3 @@
-![image](https://github.com/konnir/llm_straem_from_queue/assets/119952960/a5b64758-c1d3-4ff5-b8e9-34dc756c9d0f)# Stream Vs Queue in LLM Stream Response
 - The purpose of this repository is to compare the time difference between direct stream LLM responses and reading them from Queues. 
 - In this Demo any token is published to the queue for demonstaration. In real use it's wise to decide on full sentence or line break for queue write and read.
 
