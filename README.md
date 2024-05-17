@@ -3,9 +3,8 @@
 - In this Demo any token is published to the queue for demonstaration. In real use it's wise to decide on full sentence or line break for queue write and read.
 
 Demo UI: https://parallel-llm-queue-iu5vx2gsqa-uc.a.run.app 
-
-`*. (Please allow about 1 minute for the machine to wake up)`
-`**. (it's a stream delicate demo, if not working for the dirst time give it a few tries and it will work)`
+-`*. (Please allow about 1 minute for the machine to wake up)`
+-`**. (it's a stream delicate demo, if not working for the dirst time give it a few tries and it will work)`
 
 ![image](https://github.com/konnir/llm_straem_from_queue/assets/119952960/c68a35f3-3941-40f6-8b48-9342c009f5cc)
 
