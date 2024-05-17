@@ -1,0 +1,7 @@
+google-cloud-pubsub==2.21.1
+openai==1.16.1
+python-dotenv==1.0.1
+fastapi==0.110.1
+uvicorn==0.29.0
+python-multipart==0.0.9
+PyYAML==6.0.1

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stream Vs Queue in LLM Stream Response</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        .container {
+            display: flex;
+        }
+        .column {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+<div style="text-align: center;">
+    <h1>Stream Vs Queue in LLM Stream Response</h1>
+</div>
+
+<div class="container">
+    <div class="column">
+        <h2>Select Song Topic</h2>
+        <form id="optionsForm">
+            <input type="radio" id="darkenedMoonlitForest" name="option" value="Darkened Moonlit Forest">
+            <label for="darkenedMoonlitForest">Darkened Moonlit Forest</label><br>
+            <input type="radio" id="shadowsOfThePast" name="option" value="Shadows of the Past">
+            <label for="shadowsOfThePast">Shadows of the Past</label><br>
+            <input type="radio" id="hauntedMemories" name="option" value="Haunted Memories">
+            <label for="hauntedMemories">Haunted Memories</label><br>
+            <input type="radio" id="whisperingSpirits" name="option" value="Whispering Spirits">
+            <label for="whisperingSpirits">Whispering Spirits</label><br>
+            <input type="radio" id="eternalNight" name="option" value="Eternal Night">
+            <label for="eternalNight">Eternal Night</label><br>
+            <input type="radio" id="lostSouls" name="option" value="Lost Souls">
+            <label for="lostSouls">Lost Souls</label><br>
+            <input type="radio" id="gothicRomance" name="option" value="Gothic Romance">
+            <label for="gothicRomance">Gothic Romance</label><br>
+            <input type="radio" id="vampiresLament" name="option" value="Vampires' Lament">
+            <label for="vampiresLament">Vampires' Lament</label><br>
+            <input type="radio" id="forgottenRuins" name="option" value="Forgotten Ruins">
+            <label for="forgottenRuins">Forgotten Ruins</label><br>
+            <input type="radio" id="echoesOfDespair" name="option" value="Echoes of Despair">
+            <label for="echoesOfDespair">Echoes of Despair</label><br>
+            <input type="radio" id="custom" name="option" value="Custom">
+            <label for="custom">Custom:</label>
+            <input type="text" id="customText" name="customText"><br><br>
+            <button type="button" onclick="generateText()">Generate</button>
+        </form>
+    </div>
+
+    <div class="column">
+        <h2>Direct Stream</h2>
+        <pre id="streamOutput"></pre>
+    </div>
+
+    <div class="column">
+        <h2>Queue Stream</h2>
+        <pre id="queueOutput"></pre>
+    </div>
+</div>
+
+<script>
+    function generateText() {
+        const form = document.getElementById('optionsForm');
+        const formData = new FormData(form);
+        let selectedOption = formData.get('option');
+        if (selectedOption === 'Custom') {
+            selectedOption = formData.get('customText');
+        }
+
+        // Ensure selectedOption is not empty
+        if (!selectedOption) {
+            alert("Please select an option or enter a custom text.");
+            return;
+        }
+
+        // Create URL-encoded string from form data
+        const urlEncodedData = new URLSearchParams();
+        urlEncodedData.append('topic', selectedOption);
+
+        // Clear both the stream and queue output areas before starting the new stream
+        document.getElementById('streamOutput').textContent = '';
+        document.getElementById('queueOutput').textContent = '';
+
+        // Ensure the URL is correct
+        fetch(`http://${window.location.hostname}:8081/get_text_stream`, {
+            method: 'POST',
+            body: urlEncodedData.toString(),
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        })
+        .then(response => {
+            const reader = response.body.getReader();
+            (function processText() {
+                reader.read().then(({ done, value }) => {
+                    if (done) {
+                        return;
+                    }
+                    const textChunk = new TextDecoder("utf-8").decode(value);
+                    document.getElementById('streamOutput').textContent += textChunk;
+                    processText(); // Recursively read more data
+                });
+            })();
+        })
+        .catch(error => {
+            console.error('Error during fetch/stream:', error);
+            document.getElementById('streamOutput').textContent = 'Stream error: ' + error;
+        });
+    }
+
+    function fetchQueueMessages() {
+        const queueOutput = document.getElementById('queueOutput');
+
+        // Ensure the URL is correct
+        fetch(`http://${window.location.hostname}:8082/get_text_queue_stream`)
+        .then(response => {
+            const reader = response.body.getReader();
+            (function processQueueMessages() {
+                reader.read().then(({ done, value }) => {
+                    if (done) {
+                        return;
+                    }
+                    let message = new TextDecoder("utf-8").decode(value);
+                    queueOutput.textContent += message;
+                    let messageParts = message.split('\n');
+                    processQueueMessages(); // Recursively read more data
+                });
+            })();
+        })
+        .catch(error => {
+            console.error('Error during fetch/stream:', error);
+            queueOutput.textContent += 'Queue error: ' + error;
+        });
+    }
+
+    // Fetch queue messages on page load
+    window.onload = fetchQueueMessages;
+</script>
+</body>
+</html>

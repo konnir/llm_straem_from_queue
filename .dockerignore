@@ -1,0 +1,15 @@
+# Ignore all files and directories
+**
+
+# But include the directories and files needed for the build
+!llm
+!prompts
+!queues
+!templates
+!util
+!static
+!llm_queue_server.py
+!llm_stream_server.py
+!message_queue_config.yaml
+!requirements.txt
+!nginx.conf
