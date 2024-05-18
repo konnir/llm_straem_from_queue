@@ -40,7 +40,6 @@ consumer_handler = GcpPubSubConsumer(
 queue = None
 event_loop = None
 
-
 @app.on_event("startup")
 async def startup_event():
     global queue, event_loop
@@ -50,17 +49,26 @@ async def startup_event():
     # Start the message consumer in a separate thread
     threading.Thread(target=consumer_handler.consume_messages, args=(callback,), daemon=True).start()
 
-
 @app.get("/")
 async def main():
     return FileResponse('templates/index.html')
 
 
-@app.get('/get_text_queue_stream')
+@app.post('/get_text_queue_stream')
 async def get_text_queue_stream(request: Request):
+
+    form_data = await request.form()
+    uuid_key = form_data.get('uuid_key', '')
+
     async def pubsub_stream():
         while True:
-            message = await queue.get()
+            message_with_key = await queue.get()
+            uuid_key_msg = message_with_key.split("|")[0]
+            if uuid_key_msg != uuid_key:
+                continue
+            message = message_with_key.split("|")[1]
+            if message == "^^^END^^^":
+                break
             yield message
 
     return StreamingResponse(pubsub_stream(), media_type='text/event-stream')

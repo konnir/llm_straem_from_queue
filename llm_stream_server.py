@@ -33,13 +33,18 @@ producer_handler = GcpPubSubProducer(
 async def main():
     return FileResponse('templates/index.html')
 
+@app.get("/wake_up")
+async def wake_up():
+    return {"status": "OK"}
+
 @app.post('/get_text_stream')
 async def get_text_stream(request: Request):
+
     form_data = await request.form()
     text = form_data.get('topic', 'dog')
+    uuid_key = form_data.get('uuid_key', '')
 
     async def generate_tokens():
-        print("generate")
         try:
             completion = llm_handler.llm_compilation_stream(
                 text=text,
@@ -50,13 +55,16 @@ async def get_text_stream(request: Request):
                 if getattr(chunk, 'choices', None):
                     delta_text = chunk.choices[0].delta.content if getattr(chunk.choices[0].delta, 'content', None) else ""
                     delta_text_bytes = delta_text.encode('utf-8')
+                    delta_text_bytes_with_key = f"{uuid_key}|{delta_text}".encode('utf-8')
                     if delta_text is not None:
-                        producer_handler.publish_messages([delta_text_bytes])
+                        producer_handler.publish_messages([delta_text_bytes_with_key])
                         yield delta_text_bytes
+                    if chunk.choices[0].finish_reason is not None:
+                        producer_handler.publish_messages([f"{uuid_key}|^^^END^^^".encode('utf-8')])
+                        break
         except Exception as e:
             print('error')
             yield str(e).encode('utf-8')
-
     return StreamingResponse(generate_tokens(), media_type="text/plain")
 
 if __name__ == "__main__":
