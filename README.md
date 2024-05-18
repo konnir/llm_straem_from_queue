@@ -14,7 +14,8 @@ How to use?
 - add file "message_queue_config.yaml" with: project, llm_stram, subscription
 - open-ai - add ".env" file with your "OPENAI_API_KEY=" to "./llm/open_ai"
 - Start llm_stream_server.py
-- Inside: llm_queue_server.py, change in method "main()" to read "templates/index_local.html" instead of index.html
+- "index.html" - change to your IP or GCP server (pay attention it is set up to the demo service as stream soruce !!!)
+- Inside: llm_queue_server.py
 - Start llm_queue_server.py
 
 Licence: 
