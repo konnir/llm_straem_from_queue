@@ -1,3 +1,8 @@
+<p align="left">
+<!--   <img src="https://github.com/konnir/x_grammar_spelling/assets/119952960/f415aef0-dd6b-4223-81be-9ce5d677b53a" alt="anyword_logo" width="150" style="margin-left: 50px;"/> -->
+  <img src="https://github.com/konnir/x_grammar_spelling/assets/119952960/aaae3161-5d93-4e82-87bf-1ac468f1817a" alt="Nir_Kon_Logo_inverted (1)" width="100"/>
+</p>
+
 # Stream Vs Queue in LLM Stream Response
 - The purpose of this repository is to compare the time difference between direct stream LLM responses and reading them from Queues. 
 - In this Demo any token is published to the queue for demonstaration. In real use it's wise to decide on full sentence or line break for queue write and read.
