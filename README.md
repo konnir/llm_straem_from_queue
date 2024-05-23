@@ -10,6 +10,8 @@
 Demo UI: [http://parallel.nir-kon.com](https://loading-proxy-iu5vx2gsqa-uc.a.run.app/get?url=https://parallel-llm-queue-iu5vx2gsqa-uc.a.run.app&description=%22About%2030%20seconds%20to%20load%22)
 - `*. (Please allow about 1 minute for the machine to wake up)`
 - `**. (it's a stream delicate demo, if not working for the first time give it a few tries and it will work)`
+- Demo UI: <a href="http://parallel.nir-kon.com" target="_blank">http://parallel.nir-kon.com</a>
+
 
 ![image](https://github.com/konnir/llm_straem_from_queue/assets/119952960/c68a35f3-3941-40f6-8b48-9342c009f5cc)
 
