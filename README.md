@@ -7,7 +7,7 @@
 - The purpose of this repository is to compare the time difference between direct stream LLM responses and reading them from Queues. 
 - In this Demo any token is published to the queue for demonstaration. In real use it's wise to decide on full sentence or line break for queue write and read.
 
-Demo UI: [http://parallel.nir-kon.com](https://loading-proxy-iu5vx2gsqa-uc.a.run.app/get?url=https://parallel-llm-queue-iu5vx2gsqa-uc.a.run.app)
+Demo UI: [http://parallel.nir-kon.com](https://loading-proxy-iu5vx2gsqa-uc.a.run.app/get?url=https://parallel-llm-queue-iu5vx2gsqa-uc.a.run.app&description=%22About%2030%20seconds%20to%20load%22)
 - `*. (Please allow about 1 minute for the machine to wake up)`
 - `**. (it's a stream delicate demo, if not working for the first time give it a few tries and it will work)`
 
