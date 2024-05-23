@@ -10,7 +10,9 @@
 Demo UI: [http://parallel.nir-kon.com](https://loading-proxy-iu5vx2gsqa-uc.a.run.app/get?url=https://parallel-llm-queue-iu5vx2gsqa-uc.a.run.app&description=%22About%2030%20seconds%20to%20load%22)
 - `*. (Please allow about 1 minute for the machine to wake up)`
 - `**. (it's a stream delicate demo, if not working for the first time give it a few tries and it will work)`
-Demo UI: <a href="https://loading-proxy-iu5vx2gsqa-uc.a.run.app/get?url=https://parallel-llm-queue-iu5vx2gsqa-uc.a.run.app&description=%22About%2030%20seconds%20to%20load%22" target="_blank">http://parallel.nir-kon.com</a>
+Demo UI:
+
+<a href="https://loading-proxy-iu5vx2gsqa-uc.a.run.app/get?url=https://parallel-llm-queue-iu5vx2gsqa-uc.a.run.app&description=%22About%2030%20seconds%20to%20load%22" target="_blank">http://parallel.nir-kon.com</a>
 
 
 
